@@ -15,13 +15,28 @@ const publicDir = path.join(__dirname, 'public');
 //routes
 const users = require('./routes/user');
 
+// import middleware
+const logger = require('./middleware/logger');
+const errorHandler = require('./middleware/errorHandler');
+
+// console.log(`errorHandler: ${errorHandler}`)
+
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
+
+
 // setup static files
 app.use(express.static(publicDir));
 app.use('/v1/api/users', users);
+
+
+
+// middleware
+// all the middlewares must be added after the other routes
+app.use(logger);
+app.use(errorHandler);
 
 
 
