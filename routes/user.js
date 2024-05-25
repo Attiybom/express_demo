@@ -46,9 +46,53 @@ router.post("/", (req, res) => {
 
   users.push({ id: users.length + 1, name });
 
-  res.send({
+  res.status(201).json({
     message: "User created successfully",
   });
 });
+
+
+// update user by id
+router.put("/:id", (req, res) => {
+  const id = parseInt(req.params.id);
+
+  const user = users.find((user) => user.id === id);
+
+  if (!user) {
+    return res.status(404).json({ message: "User not found" });
+  }
+
+  const { name } = req.body;
+
+  if (!name) {
+    return res.status(400).json({ message: "Name is required" });
+  }
+
+
+  user.name = name;
+
+  res.status(201).json({
+    message: "User updated successfully",
+  });
+});
+
+
+// delete user by id
+router.delete("/:id", (req, res) => {
+  const id = parseInt(req.params.id);
+
+  const index = users.findIndex((user) => user.id === id);
+
+  if (index === -1) {
+    return res.status(404).json({ message: "User not found" });
+  }
+
+  users.splice(index, 1);
+
+  res.status(201).json({
+    message: "User deleted successfully",
+  });
+});
+
 
 module.exports = router;
