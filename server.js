@@ -36,8 +36,8 @@ app.use('/v1/api/users', users);
 
 // middleware
 // all the middlewares must be added after the other routes
-app.use(notFound);
 app.use(logger);
+app.use(notFound);
 app.use(errorHandler);
 
 
