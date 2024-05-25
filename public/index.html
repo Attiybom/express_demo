@@ -7,6 +7,19 @@
 </head>
 <body>
   <h1>Welcome to express_demo</h1>
-  <p>This is a demo of express.js</p>
+
+  <form id="add-user-form">
+    <label for="name">Name:</label><br>
+    <input type="text" id="name" name="name" required><br>
+    <button type="submit" id="create-user-btn">Add User</button>
+  </form>
+
+  <div class="container">
+    <button id="get-users-btn">get all users</button>
+    <div id="output"></div>
+
+    <script src="./js/main.js"></script>
+  </div>
+
 </body>
 </html>

@@ -18,6 +18,7 @@ const users = require('./routes/user');
 // import middleware
 const logger = require('./middleware/logger');
 const errorHandler = require('./middleware/errorHandler');
+const notFound = require('./middleware/notFound');
 
 // console.log(`errorHandler: ${errorHandler}`)
 
@@ -36,6 +37,7 @@ app.use('/v1/api/users', users);
 // middleware
 // all the middlewares must be added after the other routes
 app.use(logger);
+app.use(notFound);
 app.use(errorHandler);
 
 
