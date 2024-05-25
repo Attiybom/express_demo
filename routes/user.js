@@ -26,7 +26,7 @@ router.get("/:id", (req, res, next) => {
   if (!user) {
 
     const error = new Error("User not found");
-
+    error.status = 404;
     return next(error);
 
     // return res.status(404).json({ message: "User not found" });
@@ -36,12 +36,15 @@ router.get("/:id", (req, res, next) => {
 });
 
 // create new user
-router.post("/", (req, res) => {
+router.post("/", (req, res, next) => {
   const { name } = req.body;
 
   // validate name
   if (!name) {
-    return res.status(400).json({ message: "Name is required" });
+
+    const error = new Error("Name is required");
+    error.status = 400;
+    return next(error);
   }
 
   // check if user already exists
